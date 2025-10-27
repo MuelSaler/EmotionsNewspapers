@@ -5,7 +5,7 @@ It originated during the hackathon *culture.explore(data)* at the Berlin State L
 
 The repository provides a **reproducible data pipeline** for:
 1. **Data Preparation**: XML ➜ TXT ➜ normalization ➜ TSV (columns: `id`, `text`, `year`, ...)
-2. **Classification**: Use the emotion classifier developed by *Leonard Konle et al., University of Würzburg*
+2. **Classification**: Use the emotion classifier developed by *Leonard Konle et al., University of Würzburg* https://github.com/LeKonArD/Gattungen_und_Emotionen_dhd2023.git
 3. **Merging and Metadata**: Merge classification results, clean one-word lines, add era information
 4. **Visualization**: Generate time series and significance visualizations
 
@@ -28,7 +28,7 @@ python scripts/prepare_data.py --input-xml data/raw/xml --out-tsv data/processed
 ```
 
 ### 2) Emotion Classification (external)
-- Follow the instructions from the Würzburg classifier repository.
+- Follow the instructions from the classifier repository.
 - Use `data/processed/corpus.tsv` as input.
 - Place resulting TSV files under `results/` (e.g., `results/run1.tsv`).
 
@@ -40,6 +40,7 @@ python scripts/merge_classifier_outputs.py \
   --out data/processed/merged.tsv \
   --config config/eras.yaml \
   --drop-single-word-lines
+# The classifier struggles with single word lines.
 ```
 
 ### 4) Visualization
@@ -82,7 +83,6 @@ Adjust the years for:
 - **pre-war / war / post-war periods**
 - **pre-/post-Hugenberg era**
 
-The Hugenberg cutoff year is a placeholder (`null`); please replace it with the correct value based on historical research.
 
 ## Data Format (TSV)
 
@@ -93,7 +93,7 @@ Expected columns in `data/processed/corpus.tsv`:
 - optional: `era1`, `era2`
 
 After merging (`data/processed/merged.tsv`), additional columns include:
-- emotion columns (e.g., `emo_anger`, `emo_joy`, ... depending on classifier output)
+- emotion columns (depending on classifier output)
 - `era_war` (`pre_war` / `war` / `post_war`)
 - `era_hugenberg` (`pre_hugenberg` / `post_hugenberg`)
 
@@ -109,7 +109,7 @@ After merging (`data/processed/merged.tsv`), additional columns include:
 
 If you use this repository or parts of it, please acknowledge:
 - *culture.explore(data) Hackathon @ Staatsbibliothek zu Berlin*
-- *Leonard Konle et al., University of Würzburg, Emotion Classifier*
+- *Leonard Konle et al., Emotion Classifier*
 
 ## License
 
